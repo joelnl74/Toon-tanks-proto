@@ -20,6 +20,13 @@ void AEnemyTurret::Tick(float DeltaTime)
 	}
 }
 
+void AEnemyTurret::HandleOnDestroy()
+{
+	Super::HandleOnDestroy();
+
+	Destroy();
+}
+
 void AEnemyTurret::BeginPlay()
 {
 	Super::BeginPlay();

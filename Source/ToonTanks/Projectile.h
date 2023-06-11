@@ -34,4 +34,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Movement")
 	class UProjectileMovementComponent* projectileMovementComponent;
 
+	UPROPERTY(EditAnywhere)
+	float damage = 50.0f;
+
 };

@@ -19,6 +19,9 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
+
+	void HandleOnDestroy();
+	APlayerController* GetPlayerController() const { return playerController; }
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

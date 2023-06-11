@@ -40,6 +40,14 @@ void APlayerTankPawn::Tick(float DeltaTime)
 	RotateTurret(result.ImpactPoint);
 }
 
+void APlayerTankPawn::HandleOnDestroy()
+{
+	Super::HandleOnDestroy();
+
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
 void APlayerTankPawn::BeginPlay()
 {
 	Super::BeginPlay();
