@@ -22,6 +22,7 @@ void APlayerTankPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &APlayerTankPawn::Move);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &APlayerTankPawn::Rotate);
 
+	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &APlayerTankPawn::Fire);
 }
 
 void APlayerTankPawn::Tick(float DeltaTime)

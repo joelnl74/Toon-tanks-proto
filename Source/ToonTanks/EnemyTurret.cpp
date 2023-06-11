@@ -14,9 +14,7 @@ void AEnemyTurret::Tick(float DeltaTime)
 		return;
 	}
 
-	float distance = FVector::Dist(GetActorLocation(), playerTankPawn->GetActorLocation());
-
-	if (distance < fireRange)
+	if (playerInRange())
 	{
 		RotateTurret(playerTankPawn->GetActorLocation());
 	}
@@ -27,4 +25,20 @@ void AEnemyTurret::BeginPlay()
 	Super::BeginPlay();
 
 	playerTankPawn = Cast<APlayerTankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+
+	GetWorldTimerManager().SetTimer(fireTimeHandle, this, &AEnemyTurret::CheckFireCondition, fireDelay, true);
+}
+
+void AEnemyTurret::CheckFireCondition()
+{
+	if (playerInRange())
+	{
+		Fire();
+	}
+}
+
+bool AEnemyTurret::playerInRange()
+{
+	float distance = FVector::Dist(GetActorLocation(), playerTankPawn->GetActorLocation());
+	return distance < fireRange;
 }
