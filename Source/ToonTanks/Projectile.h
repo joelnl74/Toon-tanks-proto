@@ -37,4 +37,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float damage = 50.0f;
 
+	UPROPERTY(EditAnywhere, Category = "Visuals")
+	class UParticleSystem* hitParticleSystem;
+	UPROPERTY(EditAnywhere, Category = "Visuals")
+	class UParticleSystemComponent* trailParticleSystem;
+
 };

@@ -26,13 +26,16 @@ private:
 	class UCapsuleComponent* capsuleComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess= "true"))
-	UStaticMeshComponent *baseMesh;
+	UStaticMeshComponent* baseMesh;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess= "true"))
-	UStaticMeshComponent *gunMesh;
+	UStaticMeshComponent* gunMesh;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess= "true"))
-	USceneComponent *projectileSpawnPoint;
+	USceneComponent* projectileSpawnPoint;
+
+	UPROPERTY(EditAnywhere, Category = "Visuals")
+	class UParticleSystem* deathParticleSystem;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat parameters")
 	TSubclassOf<class AProjectile> projectileClass;

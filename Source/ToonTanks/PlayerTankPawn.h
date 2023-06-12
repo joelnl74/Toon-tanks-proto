@@ -42,5 +42,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Parameters")
 	float m_rotationSpeed = 45.0f;
 
+	UPROPERTY(EditAnywhere, Category = "Visuals")
+	class UParticleSystemComponent* trailParticleSystem;
+
 	APlayerController* playerController;
 };
