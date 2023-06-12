@@ -38,7 +38,12 @@ void AEnemyTurret::BeginPlay()
 
 void AEnemyTurret::CheckFireCondition()
 {
-	if (playerInRange())
+	if (playerTankPawn == nullptr)
+	{
+		return;
+	}
+
+	if (playerInRange() && playerTankPawn->isAlive())
 	{
 		Fire();
 	}

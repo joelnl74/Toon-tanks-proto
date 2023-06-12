@@ -49,6 +49,7 @@ void APlayerTankPawn::HandleOnDestroy()
 
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
+	m_isAlive = false;
 }
 
 void APlayerTankPawn::BeginPlay()

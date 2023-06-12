@@ -22,6 +22,7 @@ public:
 
 	void HandleOnDestroy();
 	APlayerController* GetPlayerController() const { return playerController; }
+	bool isAlive() { return m_isAlive; }
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -44,6 +45,8 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Visuals")
 	class UParticleSystemComponent* trailParticleSystem;
+
+	bool m_isAlive = true;
 
 	APlayerController* playerController;
 };
