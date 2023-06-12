@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "MainGameMode.h"
 #include <Kismet/GameplayStatics.h>
 #include "PlayerTankPawn.h"
@@ -16,6 +15,8 @@ void AMainGameMode::BeginPlay()
 
 void AMainGameMode::OnHandleStartPlay()
 {
+	targetTowers = GetTargetTowerCount();
+
 	playerPawn = Cast<APlayerTankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
 	mainPlayerController = Cast<AMainPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
 	mainPlayerController->SetPlayerControllerState(false);
@@ -38,6 +39,14 @@ void AMainGameMode::OnHandleStartPlay()
 	);
 }
 
+int32 AMainGameMode::GetTargetTowerCount()
+{
+	TArray<AActor*> towers;
+	UGameplayStatics::GetAllActorsOfClass(this, AEnemyTurret::StaticClass(), towers);
+
+	return towers.Num();
+}
+
 void AMainGameMode::ActorDied(AActor* deadActor)
 {
 	if (playerPawn == nullptr)
@@ -50,13 +59,19 @@ void AMainGameMode::ActorDied(AActor* deadActor)
 		playerPawn->HandleOnDestroy();
 		mainPlayerController->SetPlayerControllerState(false);
 
+		GameOver(false);
+
 		return;
 	}
 
 	if (AEnemyTurret* destroyedTurret = Cast<AEnemyTurret>(deadActor))
 	{
 		destroyedTurret->HandleOnDestroy();
+		--targetTowers;
+	}
+
+	if (targetTowers <= 0)
+	{
+		GameOver(true);
 	}
 }
-
-

@@ -24,8 +24,12 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartGame();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void GameOver(bool wonGame);
+
 private:
 	void OnHandleStartPlay();
+	int32 GetTargetTowerCount();
 
 private:
 	class APlayerTankPawn* playerPawn;
@@ -33,4 +37,6 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float startDelay = 3.0f;
+
+	int32 targetTowers = 0;
 };
