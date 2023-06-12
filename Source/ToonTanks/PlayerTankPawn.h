@@ -20,6 +20,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnDeath();
 	void HandleOnDestroy();
 	APlayerController* GetPlayerController() const { return playerController; }
 	bool isAlive() { return m_isAlive; }

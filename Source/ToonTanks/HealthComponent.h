@@ -28,8 +28,9 @@ private:
 	UFUNCTION()
 	void OnDamageTaken(AActor* damagedActor, float damage, const UDamageType* damageType, class AController* instigator, AActor* damageCauser);
 private:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess= "true"))
 	float maxHealth = 100;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess= "true"))
 	float health = 0.0f;
 
 	class AMainGameMode* mainGameMode;

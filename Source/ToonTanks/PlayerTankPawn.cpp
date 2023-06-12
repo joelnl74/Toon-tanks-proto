@@ -49,6 +49,7 @@ void APlayerTankPawn::HandleOnDestroy()
 
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
+	OnDeath();
 	m_isAlive = false;
 }
 
