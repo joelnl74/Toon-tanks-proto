@@ -21,6 +21,16 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartGame();
+
+private:
+	void OnHandleStartPlay();
+
 private:
 	class APlayerTankPawn* playerPawn;
+	class AMainPlayerController* mainPlayerController;
+
+	UPROPERTY(EditAnywhere)
+	float startDelay = 3.0f;
 };

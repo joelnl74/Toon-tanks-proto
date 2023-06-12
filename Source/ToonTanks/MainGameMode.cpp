@@ -5,12 +5,37 @@
 #include <Kismet/GameplayStatics.h>
 #include "PlayerTankPawn.h"
 #include "EnemyTurret.h"
+#include "MainPlayerController.h"
 
 void AMainGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	OnHandleStartPlay();
+}
+
+void AMainGameMode::OnHandleStartPlay()
+{
 	playerPawn = Cast<APlayerTankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+	mainPlayerController = Cast<AMainPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
+	mainPlayerController->SetPlayerControllerState(false);
+
+	StartGame();
+
+	FTimerHandle playerEnableTimerHandle;
+	FTimerDelegate playerEnableTimerDelegate = FTimerDelegate::CreateUObject(
+		mainPlayerController,
+		&AMainPlayerController::SetPlayerControllerState,
+		true
+	);
+
+	GetWorldTimerManager().SetTimer
+	(
+		playerEnableTimerHandle,
+		playerEnableTimerDelegate,
+		startDelay,
+		false
+	);
 }
 
 void AMainGameMode::ActorDied(AActor* deadActor)
@@ -20,11 +45,10 @@ void AMainGameMode::ActorDied(AActor* deadActor)
 		return;
 	}
 
-	if (deadActor == playerPawn)
+	if (mainPlayerController && deadActor == playerPawn)
 	{
 		playerPawn->HandleOnDestroy();
-		playerPawn->DisableInput(playerPawn->GetPlayerController());
-		playerPawn->GetPlayerController()->bShowMouseCursor = false;
+		mainPlayerController->SetPlayerControllerState(false);
 
 		return;
 	}
@@ -33,8 +57,6 @@ void AMainGameMode::ActorDied(AActor* deadActor)
 	{
 		destroyedTurret->HandleOnDestroy();
 	}
-
-
 }
 
 
