@@ -39,4 +39,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat parameters")
 	TSubclassOf<class AProjectile> projectileClass;
+
+	UPROPERTY(EditAnywhere, Category = "Audio")
+	class USoundBase* deathSound;
 };
